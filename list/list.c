@@ -1,18 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <malloc.h>
 #include <assert.h>
 
 #include "list.h"
 
-void printList(struct list* n){
+void printList(t_list* n) {
     while (n != NULL) {
         printf(" %d ", n->data);
         n = n->next;
     }
+    printf("\n");
 }
 
-bool search(struct list* head, T data){
-    struct list* temp = head;
+bool search(t_list* head, T data){
+    t_list* temp = head;
     while(temp != NULL){
         if(temp->data == data) return true;
         else temp = temp->next;
@@ -20,8 +22,8 @@ bool search(struct list* head, T data){
     return false;
 }
 
-list *push_front(struct list *ptr, T data){
-    struct list* temp = (struct list*)malloc(sizeof(struct list));
+t_list *push_front(t_list *ptr, T data){
+    t_list* temp = (t_list*)malloc(sizeof(t_list));
     assert(temp != NULL); // memory error
     temp->data = data;
     temp->next = ptr;
@@ -29,20 +31,20 @@ list *push_front(struct list *ptr, T data){
     return ptr;
 }
 
-void push_back(struct list *head, T data){
-    struct list *current = head;
+void push_back(t_list *head, T data){
+    t_list *current = head;
     while (current->next != NULL)
         current = current->next;
 
-    current->next = (struct list*)malloc(sizeof(struct list));
+    current->next = (t_list*)malloc(sizeof(t_list));
     assert(current->next != NULL); // memory error
 
     current->next->data = data;
     current->next->next = NULL;
 }
 
-void push_MEGDU(struct list *head, T data){
-    struct list* temp = (struct list*)malloc(sizeof(struct list));
+void push_MEGDU(t_list *head, T data){
+    t_list* temp = (t_list*)malloc(sizeof(t_list));
     assert(temp != NULL); // memory error
     temp->data = data;
     /*  switching block  */
@@ -50,9 +52,9 @@ void push_MEGDU(struct list *head, T data){
     head->next = temp;
 }
 
-list *free_list(struct list* head){
-    struct list* temp = head;
-    struct list* followPtr;
+t_list *free_list(t_list* head){
+    t_list* temp = head;
+    t_list* followPtr;
     while(temp != NULL){
         followPtr = temp;
         temp = temp->next;
@@ -61,16 +63,15 @@ list *free_list(struct list* head){
     return NULL;
 }
 
-list *pop_front(struct list* head){
-    struct list *temp = head->next;
+t_list *pop_front(t_list* head){
+    t_list *temp = head->next;
     free(head);
     return temp;
 }
 
-void pop_back(struct list* head){
-    struct list *temp = head;
-    while (temp != NULL){
+void pop_back(t_list* head){
+    t_list *temp = head;
+    while (temp != NULL)
         temp = temp->next;
-    }
     free(temp);
 }

@@ -2,8 +2,8 @@
 
 #include "list.h"
 
-int main(void) {
-    struct list *head = NULL;
+int main() {
+    t_list *head = NULL;
 
     head = push_front(head, 1);
     head = push_front(head, 2);
@@ -20,6 +20,6 @@ int main(void) {
     push_back(head, 228);
 
     printList(head);
-    //head = free_list(head);
+    head = free_list(head);
     return 0;
 }
