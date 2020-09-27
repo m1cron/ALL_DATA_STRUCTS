@@ -1,28 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <malloc.h>
 #include <assert.h>
 
-typedef struct b_node{
-    int n;
-    struct node *left, *right;
-}b_node;
-
-bool b_search(int n, b_node* tree){
-    if(tree == NULL) return false;
-    else if (n < tree->n) return b_search(n, tree->left);
-    else if (n > tree->n) return b_search(n, tree->right);
-    else true;
-}
-
-
-typedef int T;
-
-typedef struct list{
-    T data;
-    struct list* next;
-} list;
+#include "list.h"
 
 void printList(struct list* n){
     while (n != NULL) {
@@ -93,27 +73,4 @@ void pop_back(struct list* head){
         temp = temp->next;
     }
     free(temp);
-}
-
-
-int main() {
-    struct list *head = NULL;
-
-    head = push_front(head, 1);
-    head = push_front(head, 2);
-    head = push_front(head, 3);
-    push_back(head, 333);
-    push_MEGDU(head->next->next, 1337);
-
-    printList(head);
-    printf("\t search: [%d] -> %d\n", 1337, search(head, 1337));
-
-    head = pop_front(head);
-    head = push_front(head, 4);
-    pop_back(head);
-    push_back(head, 228);
-
-    printList(head);
-    //head = free_list(head);
-    return 0;
 }
