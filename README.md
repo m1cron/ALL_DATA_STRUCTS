@@ -7,4 +7,4 @@
 - [x] Hash Table (chain)
 - [x] Hash Table (linear probing)
 - [ ] Reb Black Tree
-- [ ] AVL Tree
+- [x] AVL Tree
