@@ -32,4 +32,7 @@ t_node              *minValueNode(t_node *node);
 t_node              *maxValueNode(t_node *node);
 int                 getBlackHeight(t_node *node);
 
+int                 findLevel(t_node *root, T k, int level);
+unsigned            maxDepth(t_node *node);
+
 #endif

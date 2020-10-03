@@ -301,3 +301,27 @@ int         getBlackHeight(t_node *node) {
     }
     return blackheight;
 }
+
+int findLevel(t_node *root, T k, int level) {
+    if (root == NULL)
+        return -1;
+    if (root->data == k)
+        return level;
+
+    int l = findLevel(root->left, k, level+1);
+    return (l != -1)? l : findLevel(root->right, k, level+1);
+}
+
+unsigned maxDepth(t_node *node){
+    if (node == NULL)
+        return (0);
+    else {
+        unsigned l = maxDepth(node->left);
+        unsigned r = maxDepth(node->right);
+
+        if (l > r)
+            return (l + 1);
+        else
+            return (r + 1);
+    }
+}

@@ -14,4 +14,6 @@ int main(void) {
     root = insertValue(root, 50);
     root = insertValue(root, 25);
     preorderBST(root); root = deleteValue(root, 10); printf("|----------|\n"); preorderBST(root);
+    printf("level >> %d\n", findLevel(root, 30, 0));
+    printf("max depth >> %d\n", maxDepth(root));
 }
