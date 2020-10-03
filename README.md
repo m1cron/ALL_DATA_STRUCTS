@@ -6,5 +6,5 @@
 - [x] Binary Tree
 - [x] Hash Table (chain)
 - [x] Hash Table (linear probing)
-- [ ] Reb Black Tree
+- [x] Reb Black Tree
 - [x] AVL Tree
