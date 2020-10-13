@@ -9,11 +9,13 @@ class HashTable {
     unsigned long int   BUCKETS;                      // hash table size
 
     std::list<Value>    *table;
+    typename std::list<Value>::iterator it;
 public:
     explicit            HashTable(unsigned long int size = 10);
     ~                   HashTable();
     void                insertItem(Key key, Value value);
     void                deleteItem(Key key);
+    bool                search(Key key);
     void                display();
 
     unsigned long int   hashFunc(Key key);

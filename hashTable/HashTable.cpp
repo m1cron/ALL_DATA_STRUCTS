@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 
 #include "HashTable.hpp"
 
@@ -22,15 +23,32 @@ void HashTable<Key, Value>::insertItem(Key key, Value value) {
 template<typename Key, typename Value>
 void HashTable<Key, Value>::deleteItem(Key key) {
     unsigned long int index = hashFunc(key);
+    std::string tmp;
 
-    typename std::list<Value> :: iterator it;
     for(it = table[index].begin(); it != table[index].end(); it++) {
-        if (*it == key)
+        tmp = *it;
+        if (strcmp(tmp.c_str(), key.c_str()))
             break;
     }
 
     if (it != table[index].end())
         table[index].erase(it);
+}
+
+template<typename Key, typename Value>
+bool HashTable<Key, Value>::search(Key key) {
+    unsigned long int index = hashFunc(key);
+    std::string tmp;
+
+    for(it = table[index].begin(); it != table[index].end(); it++) {
+        tmp = *it;
+        if (strcmp(tmp.c_str(), key.c_str()))
+            return (true);
+    }
+
+    if (it != table[index].end())
+        return (true);
+    return (false);
 }
 
 template<typename Key, typename Value>

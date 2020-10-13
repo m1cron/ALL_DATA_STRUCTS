@@ -1,5 +1,4 @@
-#include <memory>
-#include <iostream>
+#include <bits/stdc++.h>
 
 #include "HashNode.hpp"
 #include "HashNode.cpp"
@@ -56,7 +55,8 @@ V HashTable<K, V>::deleteNode(int key) {
 template<typename K, typename V>
 V HashTable<K, V>::get(int key) { 
     int hashIndex = getHash(key); 
-    while(arr[hashIndex] != NULL) {
+    int counter=0; 
+    while(arr[hashIndex] != NULL) {    
         int counter =0; 
         if(counter++>capacity)
             return (K)NULL;         
