@@ -8,3 +8,6 @@
 - [x] Hash Table (linear probing)
 - [x] Reb Black Tree
 - [x] AVL Tree
+- [x] Binary files
+- [x] Graph (Prim)
+- [x] Graph (Jonhson)
