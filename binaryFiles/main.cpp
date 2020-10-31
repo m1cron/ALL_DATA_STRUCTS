@@ -68,12 +68,14 @@ void num4(const std::string fileName, const std::string& key) {
 }
 
 void num8(const std::string fileName) {
-    auto *h = new HashTable<int, std::string>;
-    h->insert(10,   "5785646461");
-    h->insert(2,    "3456364534");
-    h->insert(4,    "2346435364");
-    h->insert(7,    "2345678901");
-    std::string buff = h->get(10) + "\n" + h->get(2) + "\n" + h->get(4) + "\n" + h->get(7);
+    auto *h = new HashTable<std::string, std::string>;
+    h->insert("123",   "5785646461");
+    h->insert("2",    "3456364534");
+    h->insert("4",    "2346435364");
+    h->insert("7",    "2345678901");
+    h->deleteNode("7");
+    std::string buff = h->get("123") + "\n" + h->get("2") + "\n" + h->get("4") + "\n" ;//+ h->get("7");
+    h->display();
     num1(fileName, buff);
     std::cout << num2(fileName);
 }
@@ -97,8 +99,8 @@ int main() {
     //std::cout << "-----------------------------------" << std::endl;
     //num3("1213");
     //num4("1.bin", "123");
-    //num8("8.txt");
-    num6("6.txt", "cat");
+    num8("8.txt");
+    //num6("6.txt", "cat");
 
     return 0;
 }

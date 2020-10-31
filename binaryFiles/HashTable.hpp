@@ -13,10 +13,10 @@ private:
 public: 
     HashTable();
     ~HashTable();
-    int getHash(int key);
+    int getHash(size_t key);
     void insert(K key, V value);
-    V deleteNode(int key);
-    V get(int key);
+    V deleteNode(K key);
+    V get(K key);
     int sizeofMap();
     bool isEmpty();
     void display();

@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(void) {
-    auto *h = new HashTable<unsigned long long int, std::string>;
+    auto *h = new HashTable<long, std::string>;
     h->insert(10,   "dgfhkjhdgfhlkjdgfhlkjdgfhlkjdgfhlkjdgfhlkjdgflkjhdgflkjhdgflkjhdgflkjhdgfslkjh");
     h->insert(2,    "34659879346587987346590873465908734659087egfhijhdlgfkjdgfhkjdgfkjoh");
     h->insert(4,    "34659087346598746598793465879346587946508790873465");

@@ -6,7 +6,8 @@ class HashNode {
 public:
     K key;
     V value;
-    HashNode(K key, V value);
+    size_t hash;
+    HashNode(K key, V value, size_t hash);
 };
 
 #endif

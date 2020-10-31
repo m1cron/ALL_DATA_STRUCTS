@@ -1,5 +1,4 @@
-#include <memory>
-#include <iostream>
+#include <bits/stdc++.h>
 
 #include "HashNode.hpp"
 #include "HashNode.cpp"
@@ -18,31 +17,31 @@ template<typename K, typename V>
 HashTable<K, V>::~HashTable() { delete[] arr; }
     
 template<typename K, typename V>
-int HashTable<K, V>::getHash(int key) { return key % capacity; }
+int HashTable<K, V>::getHash(size_t key) { return key % capacity; }
 
 template<typename K, typename V>
 void HashTable<K, V>::insert(K key, V value) {
-    HashNode<K, V> *temp = new HashNode<K, V>(key, value);
-    int hashIndex = getHash(key);
-    while(arr[hashIndex] != NULL && arr[hashIndex]->key != key 
-               && arr[hashIndex]->key != -1) { 
+    auto *temp = new HashNode<K, V>(key, value, std::hash<K>{}(key));
+    int hashIndex = getHash(temp->hash);
+    while(arr[hashIndex] != NULL && arr[hashIndex]->key != key )
+    {
         hashIndex++; 
         hashIndex %= capacity; 
     } 
        
-    if(arr[hashIndex] == NULL || arr[hashIndex]->key == -1) 
+    if(arr[hashIndex] == NULL )
         size++; 
     arr[hashIndex] = temp;
 }
 
-
 template<typename K, typename V>
-V HashTable<K, V>::deleteNode(int key) { 
-    int hashIndex = getHash(key); 
+V HashTable<K, V>::deleteNode(K key) {
+    size_t hash = std::hash<K>{}(key);
+    int hashIndex = getHash(hash);
           
     while(arr[hashIndex] != NULL) { 
-        if(arr[hashIndex]->key == key) { 
-            HashNode<K,V> *temp = arr[hashIndex];                   
+        if(arr[hashIndex]->hash == hash) {
+            HashNode<K,V> *temp = arr[hashIndex];
             arr[hashIndex] = dummy;                   
             size--; 
             return temp->value; 
@@ -54,11 +53,11 @@ V HashTable<K, V>::deleteNode(int key) {
 }
 
 template<typename K, typename V>
-V HashTable<K, V>::get(int key) { 
-    int hashIndex = getHash(key); 
+V HashTable<K, V>::get(K key) {
+    int hashIndex = getHash(std::hash<K>{}(key));
+    int counter = 0;
     while(arr[hashIndex] != NULL) {
-        int counter =0; 
-        if(counter++>capacity)
+        if(counter++ > capacity)
             return (K)NULL;         
         if(arr[hashIndex]->key == key) 
             return arr[hashIndex]->value; 
@@ -76,9 +75,8 @@ bool HashTable<K, V>::isEmpty() { return size == 0; }
 
 template<typename K, typename V>
 void HashTable<K, V>::display() { 
-    for(int i=0 ; i<capacity ; i++) { 
-        if(arr[i] != NULL && arr[i]->key != -1) 
-            std::cout << "key = " << arr[i]->key  
-                <<"  value = "<< arr[i]->value << std::endl; 
+    for(int i = 0; i < capacity; i++) {
+        if(arr[i] != NULL)
+            std::cout << "key = " << arr[i]->key << " hash = " << arr[i]->hash << "  value = "<< arr[i]->value << std::endl;
     } 
 } 
