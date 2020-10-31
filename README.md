@@ -10,4 +10,4 @@
 - [x] AVL Tree
 - [x] Binary files
 - [x] Graph (Prim)
-- [x] Graph (Jonhson)
+- [x] Graph (Johnson)
