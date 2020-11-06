@@ -1,0 +1,1 @@
+gcc main.c queue.c -O3 -Wall -Wextra -Werror && ./a.out
