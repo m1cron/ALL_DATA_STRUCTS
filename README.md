@@ -2,6 +2,7 @@
 - [x] Stack
 - [x] Linked List
 - [x] Queue
+- [x] Radix sort with queue
 - [x] Deque
 - [x] Binary Tree
 - [x] Hash Table (chain)
@@ -11,3 +12,4 @@
 - [x] Binary files
 - [x] Graph (Prim)
 - [x] Graph (Johnson)
+- [x] Huffman Algorithm
