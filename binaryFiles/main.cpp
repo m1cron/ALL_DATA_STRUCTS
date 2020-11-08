@@ -1,11 +1,8 @@
 #include <iostream>
-#include <fstream>
-#include <stdio.h>
-//#include <string.h>
 
 #include "HashTable.cpp"
 
-void num1(const std::string& fileName, const std::string& str) {
+void write_file(const std::string& fileName, const std::string& str) {
     std::ofstream fs("../" + fileName, std::ios::in | std::ios::out | std::ios::binary | std::ios:: trunc);
     if (!fs)
         std::cout << "cannot open file\n";
@@ -13,7 +10,7 @@ void num1(const std::string& fileName, const std::string& str) {
     fs.close();
 }
 
-std::string num2(const std::string& fileName) {
+std::string read_file(const std::string& fileName) {
     std::ifstream is("../" + fileName, std::ios::out | std::ios::binary);
     if (!is)
         std::cout << "cannot open file\n";
@@ -45,8 +42,8 @@ void num3(const std::string& key) {
     delete[] buf;
 }
 
-void num4(const std::string fileName, const std::string& key) {
-    std::string buff = num2(fileName);
+void num4(const std::string& fileName, const std::string& key) {
+    std::string buff = read_file(fileName);
 
     const char *start = strstr(buff.c_str(), key.c_str());
     if (start) {
@@ -57,50 +54,62 @@ void num4(const std::string fileName, const std::string& key) {
             strncpy(newbuff, buff.c_str(), startlen);
             strcpy(newbuff+startlen,end+strlen("\n"));
 
-            num1(fileName, newbuff);
+            write_file(fileName, newbuff);
 
             free(newbuff);
         }
     }
     std::cout << "------------binary-file------------" << std::endl;
-    std::cout << num2(fileName) << std::endl;
+    std::cout << read_file(fileName) << std::endl;
     std::cout << "-----------------------------------" << std::endl;
 }
 
-void num8(const std::string fileName) {
+void num8(const std::string& fileName) {
     auto *h = new HashTable<std::string, std::string>;
     h->insert("123",   "5785646461");
     h->insert("2",    "3456364534");
     h->insert("4",    "2346435364");
     h->insert("7",    "2345678901");
     h->deleteNode("7");
-    std::string buff = h->get("123") + "\n" + h->get("2") + "\n" + h->get("4") + "\n" ;//+ h->get("7");
+    std::string buff = h->get("123") + "\n" + h->get("2") + "\n" + h->get("4") + "\n" ;
     h->display();
-    num1(fileName, buff);
-    std::cout << num2(fileName);
+    write_file(fileName, buff);
+    std::cout << read_file(fileName);
 }
 
-void num6(const std::string& fileName, const std::string find) {
+void find(const std::string& fileName, const std::string& find) {
     std::ifstream file("../" + fileName);
     std::string str;
     while (std::getline(file, str)) {
-        if (!str.rfind(find))
+        if (strstr(str.c_str(), find.c_str()) != nullptr)
             std::cout << str << std::endl;
     }
     file.close();
 }
 
-
 int main() {
-    std::string test = "1313 test\n123 loh\n6778 rewrwer\n4325 34587";
+    //std::string test = "1313 test\n123 loh\n6778 rewrwer\n4325 34587";
     //num1("1.bin", test);
     //std::cout << "------------binary-file------------" << std::endl;
     //std::cout << num2(1.bin) << std::endl;
     //std::cout << "-----------------------------------" << std::endl;
     //num3("1213");
     //num4("1.bin", "123");
-    num8("8.txt");
+    //num8("8.txt");
     //num6("6.txt", "cat");
 
+    auto *h = new HashTable<std::string, std::string>;
+    h->insert("а000фя",   "в угоне");
+    h->insert("а228бв",    "нет");
+    h->insert("а420уф",    "в угоне");
+    h->insert("о000оо",    "нет");
+    std::string buff = "а000фя " + h->get("а000фя") + "\nа228бв " + h->get("а228бв") + "\nа420уф " + h->get("а420уф") + "\nо000оо " + h->get("о000оо");
+    write_file("test.txt", buff);
+    std::cout << "out:\n" << read_file("test.txt") << "\n\nпоиск по номеру:\n";
+    find("test.txt", "а000фя");
+    std::cout << "\nпоиск по ключевому слову\n";
+    find("test.txt", "в угоне");
+    std::cout << "\n";
+    find("test.txt", "нет");
     return 0;
 }
